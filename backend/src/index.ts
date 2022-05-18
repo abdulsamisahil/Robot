@@ -15,6 +15,7 @@ app.post(
   isPositionValid('position'),
   body('position.direction').isIn(['N', 'S', 'E', 'W']),
   isPositionValid('grid'),
+  body('commands').isString(),
   (req: Request, res: Response) => {
     const errors = validationResult(req)
 
@@ -22,11 +23,13 @@ app.post(
       return res.status(400).json({ errors: errors.array() })
     }
 
-    const { position, grid } = req.body
+    const { position, grid, commands } = req.body
 
     const robot = new Robot({ grid, position })
 
-    res.json(robot.toString())
+    robot.runCommands(commands)
+
+    res.json({ Report: robot.toString() })
   }
 )
 
