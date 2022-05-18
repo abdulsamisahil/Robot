@@ -30,23 +30,23 @@ describe('Running all the possible robot tests', () => {
   test('From N rotate to right, 360°', () => {
     const robot = new Robot({ grid, position })
 
-    expect(robot.toString()).toBe('3, 3, N')
+    expect(robot.toString()).toBe('3 3 N')
 
     robot.runCommand('R')
 
-    expect(robot.toString()).toBe('3, 3, E')
+    expect(robot.toString()).toBe('3 3 E')
 
     robot.runCommand('R')
 
-    expect(robot.toString()).toBe('3, 3, S')
+    expect(robot.toString()).toBe('3 3 S')
 
     robot.runCommand('R')
 
-    expect(robot.toString()).toBe('3, 3, W')
+    expect(robot.toString()).toBe('3 3 W')
 
     robot.runCommand('R')
 
-    expect(robot.toString()).toBe('3, 3, N')
+    expect(robot.toString()).toBe('3 3 N')
   })
 
   /* 
@@ -57,23 +57,23 @@ describe('Running all the possible robot tests', () => {
   test('From N rotate to left, 360°', () => {
     const robot = new Robot({ grid, position })
 
-    expect(robot.toString()).toBe('3, 3, N')
+    expect(robot.toString()).toBe('3 3 N')
 
     robot.runCommand('L')
 
-    expect(robot.toString()).toBe('3, 3, W')
+    expect(robot.toString()).toBe('3 3 W')
 
     robot.runCommand('L')
 
-    expect(robot.toString()).toBe('3, 3, S')
+    expect(robot.toString()).toBe('3 3 S')
 
     robot.runCommand('L')
 
-    expect(robot.toString()).toBe('3, 3, E')
+    expect(robot.toString()).toBe('3 3 E')
 
     robot.runCommand('L')
 
-    expect(robot.toString()).toBe('3, 3, N')
+    expect(robot.toString()).toBe('3 3 N')
   })
 
   /* 
@@ -85,31 +85,31 @@ describe('Running all the possible robot tests', () => {
   test('From N, move one step forward with rotating right, 360°', () => {
     const robot = new Robot({ grid, position })
 
-    expect(robot.toString()).toBe('3, 3, N')
+    expect(robot.toString()).toBe('3 3 N')
 
     robot.runCommand('F')
 
-    expect(robot.toString()).toBe('3, 2, N')
+    expect(robot.toString()).toBe('3 2 N')
 
     robot.runCommand('R')
 
     robot.runCommand('F')
 
-    expect(robot.toString()).toBe('4, 2, E')
+    expect(robot.toString()).toBe('4 2 E')
 
     robot.runCommand('R')
     robot.runCommand('F')
 
-    expect(robot.toString()).toBe('4, 3, S')
+    expect(robot.toString()).toBe('4 3 S')
 
     robot.runCommand('R')
     robot.runCommand('F')
 
-    expect(robot.toString()).toBe('3, 3, W')
+    expect(robot.toString()).toBe('3 3 W')
 
     robot.runCommand('R')
 
-    expect(robot.toString()).toBe('3, 3, N')
+    expect(robot.toString()).toBe('3 3 N')
   })
 
   /* 
@@ -121,31 +121,31 @@ describe('Running all the possible robot tests', () => {
   test('From N, move one step forward with rotating left, 360°', () => {
     const robot = new Robot({ grid, position })
 
-    expect(robot.toString()).toBe('3, 3, N')
+    expect(robot.toString()).toBe('3 3 N')
 
     robot.runCommand('F')
 
-    expect(robot.toString()).toBe('3, 2, N')
+    expect(robot.toString()).toBe('3 2 N')
 
     robot.runCommand('L')
 
     robot.runCommand('F')
 
-    expect(robot.toString()).toBe('2, 2, W')
+    expect(robot.toString()).toBe('2 2 W')
 
     robot.runCommand('L')
     robot.runCommand('F')
 
-    expect(robot.toString()).toBe('2, 3, S')
+    expect(robot.toString()).toBe('2 3 S')
 
     robot.runCommand('L')
     robot.runCommand('F')
 
-    expect(robot.toString()).toBe('3, 3, E')
+    expect(robot.toString()).toBe('3 3 E')
 
     robot.runCommand('L')
 
-    expect(robot.toString()).toBe('3, 3, N')
+    expect(robot.toString()).toBe('3 3 N')
   })
 
   /* 
@@ -184,20 +184,68 @@ describe('Running all the possible robot tests', () => {
   test('Testing robot to move forward after the edge ends', () => {
     const robot = new Robot({ grid, position })
 
-    let isValid = robot.runCommands('FFF')
+    let isValid = robot.runCommands('FFFF')
 
     expect(isValid).toBe(false)
 
-    isValid = robot.runCommands('RRFFFFF')
+    isValid = robot.runCommands('RRFFFFFF')
 
     expect(isValid).toBe(false)
 
-    isValid = robot.runCommands('RRFFRFFF')
+    isValid = robot.runCommands('RRFFRFFFF')
 
     expect(isValid).toBe(false)
 
-    isValid = robot.runCommands('RRFFFFF')
+    isValid = robot.runCommands('RRFFFFFF')
 
     expect(isValid).toBe(false)
+  })
+
+  /* 
+    Test 1: testing robot to give us report similar to jaway. devo instructions
+  
+    */
+  test('Testing with commands RFRFFRFRF', () => {
+    const grid = {
+      x: 5,
+      y: 5,
+    }
+    const position: IPosition = {
+      x: 1,
+      y: 2,
+      direction: 'N',
+    }
+
+    const robot = new Robot({ grid, position })
+
+    let isValid = robot.runCommands('RFRFFRFRF')
+
+    expect(isValid).toBe(true)
+
+    expect(robot.toString()).toBe('1 3 N')
+  })
+
+  /* 
+    Test 2: testing robot to give us report similar to jaway. devo instructions
+  
+    */
+  test('Testing with commands RFLFFLRF', () => {
+    const grid = {
+      x: 5,
+      y: 5,
+    }
+    const position: IPosition = {
+      x: 0,
+      y: 0,
+      direction: 'E',
+    }
+
+    const robot = new Robot({ grid, position })
+
+    let isValid = robot.runCommands('RFLFFLRF')
+
+    expect(isValid).toBe(true)
+
+    expect(robot.toString()).toBe('3 1 E')
   })
 })

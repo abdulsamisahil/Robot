@@ -79,8 +79,8 @@ export class Robot {
     const grid = this.config.grid
 
     return (
-      newPosition.x >= 1 &&
-      newPosition.y >= 1 &&
+      newPosition.x >= 0 &&
+      newPosition.y >= 0 &&
       newPosition.x <= grid.x &&
       newPosition.y <= grid.y
     )
@@ -152,6 +152,6 @@ export class Robot {
   toString(): string {
     const { x, y, direction } = this.getPosition()
 
-    return `${x}, ${y}, ${direction}`
+    return `${x} ${y} ${direction}`
   }
 }
