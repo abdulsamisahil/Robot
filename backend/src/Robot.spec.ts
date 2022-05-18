@@ -27,7 +27,7 @@ describe('Running all the possible robot tests', () => {
     Testing robot that is facing North, and command it rotate right until it returns back to North
    */
 
-  test('From N rotate to right', () => {
+  test('From N rotate to right, 360°', () => {
     const robot = new Robot({ grid, position })
 
     expect(robot.toString()).toBe('3, 3, N')
@@ -54,7 +54,7 @@ describe('Running all the possible robot tests', () => {
    
     */
 
-  test('From N rotate to left', () => {
+  test('From N rotate to left, 360°', () => {
     const robot = new Robot({ grid, position })
 
     expect(robot.toString()).toBe('3, 3, N')
@@ -82,7 +82,7 @@ describe('Running all the possible robot tests', () => {
    
     */
 
-  test('From N move forward with rotating right', () => {
+  test('From N, move one step forward with rotating right, 360°', () => {
     const robot = new Robot({ grid, position })
 
     expect(robot.toString()).toBe('3, 3, N')
@@ -106,6 +106,10 @@ describe('Running all the possible robot tests', () => {
     robot.runCommand('F')
 
     expect(robot.toString()).toBe('3, 3, W')
+
+    robot.runCommand('R')
+
+    expect(robot.toString()).toBe('3, 3, N')
   })
 
   /* 
@@ -114,7 +118,7 @@ describe('Running all the possible robot tests', () => {
    
     */
 
-  test('From N move forward with rotating left', () => {
+  test('From N, move one step forward with rotating left, 360°', () => {
     const robot = new Robot({ grid, position })
 
     expect(robot.toString()).toBe('3, 3, N')
@@ -138,6 +142,10 @@ describe('Running all the possible robot tests', () => {
     robot.runCommand('F')
 
     expect(robot.toString()).toBe('3, 3, E')
+
+    robot.runCommand('L')
+
+    expect(robot.toString()).toBe('3, 3, N')
   })
 
   /* 
@@ -165,5 +173,31 @@ describe('Running all the possible robot tests', () => {
     }
 
     expect(() => new Robot({ grid, position })).toThrow()
+  })
+
+  /* 
+    Moving robot forward to the edge of the grid, 
+    with a try to step one more move forward, 
+    it should return not valid because it can not move beyod the grid values
+  
+    */
+  test('Testing robot to move forward after the edge ends', () => {
+    const robot = new Robot({ grid, position })
+
+    let isValid = robot.runCommands('FFF')
+
+    expect(isValid).toBe(false)
+
+    isValid = robot.runCommands('RRFFFFF')
+
+    expect(isValid).toBe(false)
+
+    isValid = robot.runCommands('RRFFRFFF')
+
+    expect(isValid).toBe(false)
+
+    isValid = robot.runCommands('RRFFFFF')
+
+    expect(isValid).toBe(false)
   })
 })
