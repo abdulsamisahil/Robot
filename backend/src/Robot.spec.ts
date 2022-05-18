@@ -53,4 +53,26 @@ describe('Running all the possible robot tests', () => {
     Now, testing robot that is facing North, and command it rotate left until it returns back to North
    
     */
+
+  test('From N rotate to left', () => {
+    const robot = new Robot({ grid, position })
+
+    expect(robot.toString()).toBe('3, 3, N')
+
+    robot.runCommand('L')
+
+    expect(robot.toString()).toBe('3, 3, W')
+
+    robot.runCommand('L')
+
+    expect(robot.toString()).toBe('3, 3, S')
+
+    robot.runCommand('L')
+
+    expect(robot.toString()).toBe('3, 3, E')
+
+    robot.runCommand('L')
+
+    expect(robot.toString()).toBe('3, 3, N')
+  })
 })
