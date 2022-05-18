@@ -139,4 +139,31 @@ describe('Running all the possible robot tests', () => {
 
     expect(robot.toString()).toBe('3, 3, E')
   })
+
+  /* 
+    Testing robot with invalid commands, should return Throw
+
+  */
+
+  test('Testing robot invalid commands', () => {
+    const robot = new Robot({ grid, position })
+
+    expect(() => robot.runCommands('KASD')).toThrow()
+  })
+
+  /* 
+  
+    Testing robots' constructor with wrong initialPosition arguments
+    that is out of the grid ranges, room wide and depth, should return Throw
+
+  */
+  test('Testing invalid constructor arguments', () => {
+    const position: IPosition = {
+      x: 100,
+      y: 100,
+      direction: 'E',
+    }
+
+    expect(() => new Robot({ grid, position })).toThrow()
+  })
 })
