@@ -82,7 +82,7 @@ describe('Running all the possible robot tests', () => {
    
     */
 
-  test('Testing robot to move forward', () => {
+  test('From N move forward with rotating right', () => {
     const robot = new Robot({ grid, position })
 
     expect(robot.toString()).toBe('3, 3, N')
@@ -106,5 +106,37 @@ describe('Running all the possible robot tests', () => {
     robot.runCommand('F')
 
     expect(robot.toString()).toBe('3, 3, W')
+  })
+
+  /* 
+    Now, testing robot that is facing North, and command it move forward and 
+    rotate left until it comes to same grids but with facing East
+   
+    */
+
+  test('From N move forward with rotating left', () => {
+    const robot = new Robot({ grid, position })
+
+    expect(robot.toString()).toBe('3, 3, N')
+
+    robot.runCommand('F')
+
+    expect(robot.toString()).toBe('3, 2, N')
+
+    robot.runCommand('L')
+
+    robot.runCommand('F')
+
+    expect(robot.toString()).toBe('2, 2, W')
+
+    robot.runCommand('L')
+    robot.runCommand('F')
+
+    expect(robot.toString()).toBe('2, 3, S')
+
+    robot.runCommand('L')
+    robot.runCommand('F')
+
+    expect(robot.toString()).toBe('3, 3, E')
   })
 })
