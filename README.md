@@ -6,6 +6,9 @@ This repository is a test assignment from the Devoteam, builded by Abdul Sami Sa
 
 Download the repository and open it in a text editor, (VS code recommended) and then make sure you have all the dependencies, kindly run the following commands prior to running the system:
 
+Make sure you have already node.js installed in your system: 
+
+
 First from the root run:
 
 ### `npm install`
