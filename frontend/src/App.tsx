@@ -4,33 +4,56 @@ import Header from './components/Header'
 import { getReport } from './API'
 const App = () => {
   const [report, setReport] = useState('')
-  const [robotFormData, setRobotFormData] = useState({
-    x: '',
-    y: '',
-    direction: '',
-    room_x: '',
-    room_y: '',
-    commands: '',
-  })
+  const [isError, setIsError] = useState(false)
 
-  const { x, y, direction, room_x, room_y, commands } = robotFormData
-
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setRobotFormData({ ...robotFormData, [e.target.name]: e.target.value })
-  }
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const position = { x: x, y: y, direction: direction }
-    const grid = { x: room_x, y: room_y }
 
-    const result = await getReport(position, grid, commands)
-    setReport(result)
+    const elements = e.currentTarget.elements as any
+    const x: HTMLInputElement = elements.x
+    const y: HTMLInputElement = elements.y
+    const direction: HTMLInputElement = elements.direction
+    const roomX: HTMLInputElement = elements.roomX
+    const roomY: HTMLInputElement = elements.roomY
+    const commands: HTMLInputElement = elements.commands
+
+    const position = {
+      x: x.value,
+      y: y.value,
+      direction: direction.value,
+    }
+
+    const grid = {
+      x: roomX.value,
+      y: roomY.value,
+    }
+
+    try {
+      const result = await getReport(position, grid, commands.value)
+      setReport(result)
+      setIsError(false)
+    } catch (error: any) {
+      const errorMessages = error.response.data.errors
+        .map((err: any) => err.msg)
+        .join(',\n')
+
+      setIsError(true)
+      setReport(errorMessages)
+    }
+
+    x.value = ''
+    y.value = ''
+    direction.value = ''
+    roomX.value = ''
+    roomY.value = ''
+    commands.value = ''
   }
+
   return (
     <>
-      <div className='container bg-light'>
+      <div className='container bg-light p-3'>
         <Header />
-        <Report report={report} />
+        {report !== '' ? <Report alert={isError} report={report} /> : null}
         <form onSubmit={onSubmit}>
           <div className='text-center mb-3'>
             <h3>Positioning & Commanding Robot</h3>
@@ -38,9 +61,7 @@ const App = () => {
           <div className='form-outline mb-4'>
             <input
               type='text'
-              onChange={onChange}
               name='x'
-              value={x}
               className='form-control'
               placeholder='X value'
             />
@@ -48,9 +69,7 @@ const App = () => {
           <div className='form-outline mb-4'>
             <input
               type='text'
-              onChange={onChange}
               name='y'
-              value={y}
               className='form-control'
               placeholder='Y value'
             />
@@ -58,9 +77,7 @@ const App = () => {
           <div className='form-outline mb-4'>
             <input
               type='text'
-              onChange={onChange}
               name='direction'
-              value={direction}
               className='form-control'
               placeholder='Facing, (N | E | S | W)'
             />
@@ -68,9 +85,7 @@ const App = () => {
           <div className='form-outline mb-4'>
             <input
               type='text'
-              name='room_x'
-              onChange={onChange}
-              value={room_x}
+              name='roomX'
               className='form-control'
               placeholder='Room width (Number)'
             />
@@ -78,9 +93,7 @@ const App = () => {
           <div className='form-outline mb-4'>
             <input
               type='text'
-              name='room_y'
-              onChange={onChange}
-              value={room_y}
+              name='roomY'
               className='form-control'
               placeholder='Room depth (Number)'
             />
@@ -88,9 +101,7 @@ const App = () => {
           <div className='form-outline mb-4'>
             <input
               type='text'
-              onChange={onChange}
               name='commands'
-              value={commands}
               className='form-control'
               placeholder='Commands, (R | F | L)'
             />

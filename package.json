@@ -4,12 +4,12 @@
   "description": "Robot-Programming-test",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon backend/src/index.ts",
+    "start:server": "nodemon backend/src/index.ts",
+    "start:client": "npm start --prefix frontend",
+    "start": "concurrently \"npm run start:server\" \"npm run start:client\"",
     "build": "tsc --project ./tsconfig.json",
     "test": "jest -c ./jest.unit.json --watchAll",
-    "test:coverage": "jest --coverage -c ./jest.unit.json",
-    "frontend": "npm start --prefix frontend",
-    "dev": "concurrently \"npm start\" \"npm run frontend\" \"npm run test\""
+    "test:coverage": "jest --coverage -c ./jest.unit.json"
   },
   "repository": {
     "type": "git",
