@@ -2,7 +2,7 @@
 
 This repository is a test assignment from the Devoteam, builded by Abdul Sami Sahil (2022 May 20).
 
-![Robot Image](frontend\public\image\Robot.JPG?raw=true 'Title')
+![Robot](https://user-images.githubusercontent.com/62578384/169416712-964f1ea1-5c81-4e66-9f79-38b199542088.JPG)
 
 Download the repository and open it in a text editor, (VS code recommended) and then make sure you have all the dependencies, kindly run the following commands prior to running the system:
 
