@@ -38,6 +38,9 @@ It is a client server architecture
 ### Development Enviornment
 
 Language: TypeScript
+
 Node.js
+
 React.js
+
 Bootstrap 5 as the CSS framework
