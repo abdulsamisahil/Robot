@@ -6,25 +6,27 @@ This repository is a test assignment from the Devoteam, builded by Abdul Sami Sa
 
 Download the repository and open it in a text editor, (VS code recommended) and then make sure you have all the dependencies, kindly run the following commands prior to running the system:
 
-cd frontend
+First from the root run:
 
 ### `npm install`
 
-cd backend
+Then cd to frontend and run:
 
 ### `npm install`
 
-Now from the root directory you may run:
+After running the above commands, now cd to two stage backward, cd .. and from the root directory you may now run:
 
 ### `npm start`
 
 By running the above command, Client and Server both will run at the same time.
 
+Enjoy testing the robot on a browser.
+
 To run the unit tests and to test the robot logic, from the root directory run:
 
 ### `npm run test`
 
-It will run the 9 tests that were made.
+It will run all the 9 tests that were made and will watch and track your ultimate editing to the tests automatically in case a new test is desired to be run.
 
 ### Description
 
