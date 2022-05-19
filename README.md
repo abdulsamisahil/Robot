@@ -33,8 +33,8 @@ It will run all the 9 tests that were made and will watch and track your ultimat
 
 ### Description
 
-It is a little fullstack application, that takes x, y and facing direction as inputs from the client, and return its' position back.
-The client can also command the robot by commanding like L to turn left, R to turn right and F to move forward. The client firstly decide the room's widht and depth by adding a x and y value.
+It is a little fullstack application, that takes x, y and facing direction as inputs from the client, and returns its' position back.
+The client can also command the robot by commanding like L to turn left, R to turn right and F to move forward. The client firstly needs to decide the room's widht and depth by adding a x and y value.
 
 ### Architecture
 
