@@ -4,8 +4,8 @@
   "description": "Robot-Programming-test",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon src/index.ts",
-    "build": "tsc --project ./tsconfig.json",
+    "start": "node ./dist/src/index.js",
+    "gcp-build": "tsc -p .",
     "test": "jest -c ./jest.unit.json --watchAll",
     "test:coverage": "jest --coverage -c ./jest.unit.json"
   },
