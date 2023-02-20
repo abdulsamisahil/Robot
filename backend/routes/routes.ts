@@ -1,31 +1,31 @@
-import express, { Request, Response } from 'express'
+import express, { Request, Response } from "express"
 
-import { body, validationResult, oneOf } from 'express-validator'
+import { body, validationResult, oneOf } from "express-validator"
 
-import { Robot } from '../src/Robot'
+import { Robot } from "../src/Robot"
 
 const router = express.Router()
 
 router.post(
-  '/',
-  isPositionValid('position').map((validator) =>
-    validator.withMessage('X and Y must be numbers')
+  "/",
+  isPositionValid("position").map((validator) =>
+    validator.withMessage("X and Y must be numbers")
   ),
 
-  body('position.direction')
-    .isIn(['N', 'S', 'E', 'W'])
-    .withMessage('Direction must be N | E | S | W'),
+  body("position.direction")
+    .isIn(["N", "S", "E", "W"])
+    .withMessage("Direction must be N | E | S | W"),
 
-  isPositionValid('grid').map((validator) =>
+  isPositionValid("grid").map((validator) =>
     validator.withMessage(
-      'Room x and y must be greater than position x and y, and must be numbers '
+      "Room x and y must be greater than position x and y, and must be numbers "
     )
   ),
   oneOf(
     [
-      body('commands').custom((commands: string) => {
+      body("commands").custom((commands: string) => {
         for (const command of commands) {
-          const isValid = command === 'L' || command === 'R' || command === 'F'
+          const isValid = command === "L" || command === "R" || command === "F"
 
           if (!isValid) {
             return false
@@ -33,9 +33,9 @@ router.post(
         }
         return true
       }),
-      body('commands').isEmpty(),
+      body("commands").isEmpty(),
     ],
-    'Commands must be R | L | F'
+    "Commands must be R | L | F"
   ),
   (req: Request, res: Response) => {
     const errors = validationResult(req)
@@ -53,6 +53,10 @@ router.post(
     res.json({ Report: robot.toString() })
   }
 )
+
+router.get("/get", (req: Request, res: Response) => {
+  res.send("Robot working")
+})
 
 function isPositionValid(field: string) {
   return [
