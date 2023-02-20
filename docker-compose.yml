@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  server:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - 5000:5000
+    container_name: robot-server
+    networks:
+      - robot-network
+  client: 
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    container_name: robot-client
+    networks:
+      - robot-network
+    depends_on: 
+      - server
+networks:
+  robot-network:
+    driver: bridge

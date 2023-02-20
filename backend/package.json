@@ -4,10 +4,9 @@
   "description": "Robot-Programming-test",
   "main": "index.js",
   "scripts": {
-    "start:server": "nodemon backend/src/index.ts",
-    "start:client": "npm start --prefix frontend",
-    "start": "concurrently \"npm run start:server\" \"npm run start:client\"",
-    "build": "tsc --project ./tsconfig.json",
+    "start": "node ./dist/src/index.js",
+    "build": "tsc -p .",
+    "dev": "nodemon ./src/index.ts .",
     "test": "jest -c ./jest.unit.json --watchAll",
     "test:coverage": "jest --coverage -c ./jest.unit.json"
   },
@@ -23,6 +22,7 @@
   "homepage": "https://github.com/abdulsamisahil/Robot#readme",
   "dependencies": {
     "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
     "express": "^4.18.1",
     "express-validator": "^6.14.0"
   },

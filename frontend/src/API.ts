@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from "axios"
 
 export const getReport = async (position: {}, grid: {}, commands: string) => {
   const data = JSON.stringify({
@@ -8,10 +8,10 @@ export const getReport = async (position: {}, grid: {}, commands: string) => {
   })
 
   const config = {
-    method: 'post',
-    url: '/robot',
+    method: "post",
+    url: "http://localhost:5000/robot/",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     data: data,
   }
